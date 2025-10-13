@@ -15,7 +15,7 @@ class m251013_143544_create_device_table extends Migration
         $this->createTable('{{%device}}', [
             'id' => $this->primaryKey(),
             'store_name' => $this->string()->null(),
-            'created_at' => $this->timestamp(),
+            'created_at' => $this->timestamp()->notNull(),
         ]);
 
         $this->addForeignKey(

@@ -14,7 +14,7 @@ class m251013_143205_create_store_table extends Migration
     {
         $this->createTable('{{%store}}', [
             'name' => $this->string(255)->notNull()->append('PRIMARY KEY'),
-            'created_at' => $this->timestamp(),
+            'created_at' => $this->timestamp()->notNull(),
         ]);
     }
 
