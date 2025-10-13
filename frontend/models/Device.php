@@ -6,14 +6,15 @@ use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "store".
+ * This is the model class for table "device".
  *
- * @property string $name
+ * @property string $serial_number
+ * @property string|null $store_name
  * @property string $created_at
  *
- * @property Device[] $devices
+ * @property Store $storeName
  */
-class Store extends ActiveRecord
+class Device extends ActiveRecord
 {
 
     public function behaviors()
@@ -34,7 +35,7 @@ class Store extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'store';
+        return 'device';
     }
 
     /**
@@ -43,10 +44,12 @@ class Store extends ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['store_name'], 'default', 'value' => null],
+            [['serial_number'], 'required'],
             [['created_at'], 'safe'],
-            [['name'], 'string', 'max' => 255],
-            [['name'], 'unique'],
+            [['serial_number', 'store_name'], 'string', 'max' => 255],
+            [['serial_number'], 'unique'],
+            [['store_name'], 'exist', 'skipOnError' => true, 'targetClass' => Store::class, 'targetAttribute' => ['store_name' => 'name']],
         ];
     }
 
@@ -56,19 +59,20 @@ class Store extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' => 'Name',
+            'serial_number' => 'Serial Number',
+            'store_name' => 'Store Name',
             'created_at' => 'Created At',
         ];
     }
 
     /**
-     * Gets query for [[Devices]].
+     * Gets query for [[StoreName]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getDevices()
+    public function getStoreName()
     {
-        return $this->hasMany(Device::class, ['store_name' => 'name']);
+        return $this->hasOne(Store::class, ['name' => 'store_name']);
     }
 
 }
