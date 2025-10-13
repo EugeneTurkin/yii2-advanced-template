@@ -13,7 +13,7 @@ class m251013_143205_create_store_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%store}}', [
-            'name' => $this->string(255)->notNull()->append('PRIMARY KEY'),
+            'name' => $this->string()->notNull()->append('PRIMARY KEY'),
             'created_at' => $this->timestamp()->notNull(),
         ]);
     }
