@@ -3,8 +3,8 @@
 use app\models\Store;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\ActionColumn;
-use yii\grid\GridView;
+use kartik\grid\ActionColumn;
+use kartik\grid\GridView;
 
 /** @var yii\web\View $this */
 /** @var app\models\StoreSearch $searchModel */
@@ -27,12 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'kartik\grid\SerialColumn'],
 
             'name',
             'created_at',
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'urlCreator' => function ($action, Store $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'name' => $model->name]);
                  }
