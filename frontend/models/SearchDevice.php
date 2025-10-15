@@ -61,8 +61,13 @@ class SearchDevice extends Device
             'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['ilike', 'serial_number', $this->serial_number])
-            ->andFilterWhere(['ilike', 'store_name', $this->store_name]);
+        $query->andFilterWhere(['ilike', 'serial_number', $this->serial_number]);
+
+        if ($this->store_name === '0') {
+            $query->andWhere(['store_name' => null]);
+        } else {
+            $query->andFilterWhere(['store_name' => $this->store_name]);
+        }
 
         return $dataProvider;
     }
