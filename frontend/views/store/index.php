@@ -27,8 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn'],
-
             'name',
             'created_at',
             [
