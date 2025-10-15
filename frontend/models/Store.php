@@ -44,7 +44,6 @@ class Store extends ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['created_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];

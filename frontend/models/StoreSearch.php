@@ -17,7 +17,8 @@ class StoreSearch extends Store
     public function rules()
     {
         return [
-            [['name', 'created_at'], 'safe'],
+            [['name'], 'safe'],
+            [['created_at'], 'date', 'format' => 'php:Y-m-d H:i:s']
         ];
     }
 

@@ -46,7 +46,6 @@ class Device extends ActiveRecord
         return [
             [['store_name'], 'default', 'value' => null],
             [['serial_number'], 'required'],
-            [['created_at'], 'safe'],
             [['serial_number', 'store_name'], 'string', 'max' => 255],
             [['serial_number'], 'unique'],
             [['store_name'], 'exist', 'skipOnError' => true, 'targetClass' => Store::class, 'targetAttribute' => ['store_name' => 'name']],

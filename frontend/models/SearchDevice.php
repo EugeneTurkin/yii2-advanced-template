@@ -17,7 +17,8 @@ class SearchDevice extends Device
     public function rules()
     {
         return [
-            [['serial_number', 'store_name', 'created_at'], 'safe'],
+            [['serial_number', 'store_name'], 'safe'],
+            [['created_at'], 'date', 'format' => 'php:Y-m-d H:i:s']
         ];
     }
 
