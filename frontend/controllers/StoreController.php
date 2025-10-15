@@ -7,6 +7,7 @@ use app\models\StoreSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * StoreController implements the CRUD actions for Store model.
@@ -27,8 +28,21 @@ class StoreController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-            ]
-        );
+                ]
+            );
+        }
+
+    public function actionModal($name)
+    {
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('index', [
+                'model' => $this->findModel($name),
+            ]);
+        }
+
+        return $this->render('index', [
+            'model' => $this->findModel($name),
+        ]);
     }
 
     /**
