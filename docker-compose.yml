@@ -1,24 +1,28 @@
 services:
 
   frontend:
-    build: frontend
+    depends_on:
+      - pgsql
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
     ports:
       - 20080:80
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
 
   backend:
-    build: backend
+    depends_on:
+      - pgsql
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     ports:
       - 21080:80
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
 
   pgsql:
     image: postgres:9.5
@@ -33,5 +37,3 @@ services:
 
 volumes:
   postgres:
-  backend:
-  frontend:
