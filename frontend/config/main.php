@@ -7,6 +7,16 @@ $params = array_merge(
 );
 
 return [
+    'as access' => [
+        'class' => yii\filters\AccessControl::class,
+        'except' => ['site/login', 'site/signup', 'site/error'],
+        'rules' => [
+            [
+                'allow' => true,
+                'roles' => ['@'], // @ = authenticated users
+            ],
+        ],
+    ],
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
